@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kajal Suno</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:#0d0508;min-height:100vh;display:flex;justify-content:center;align-items:center;color:#fff;padding:20px}
+.container{text-align:center;background:linear-gradient(#1c0d14,#12060c);padding:50px 35px;border-radius:18px;max-width:95%;width:500px;border:1px solid #3d1a26;box-shadow:0 0 40px rgba(255,77,109,0.15)}
+#line{font-size:20px;line-height:2.1;min-height:180px;color:#f8d8de;margin:25px 0;transition:opacity.9s;font-style:italic}
+.fade{opacity:0}
+h1{color:#ff5c7a;font-size:28px;margin-top:15px;letter-spacing:1px}
+button{padding:14px 34px;border:none;border-radius:50px;font-size:17px;cursor:pointer;margin:5px}
+#yesBtn{background:#ff4d6d;color:white}
+#noBtn{background:#333;color:#aaa}
+.dots{color:#ff5c7a;letter-spacing:8px;font-size:14px}
+.tear{font-size:60px;animation:drop 2s infinite}
+@keyframes drop{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="tear">💔</div>
+<h1>Kajal, Main Amit</h1>
+<p id="line"></p>
+<div class="dots" id="dots"></div>
+<div style="margin-top:30px">
+<button id="yesBtn" onclick="sayYes()">Maaf kar dijiye</button>
+<button id="noBtn" onmouseover="this.style.transform=`translate(${Math.random()*70-35}px,${Math.random()*40-20}px)`">Mat karo</button>
+</div>
+<div id="msg" style="display:none;margin-top:30px;color:#ffb3c1;font-size:20px;line-height:2"></div>
+</div>
+
+<script>
+let lines = [
+"Kajal... ye main hu, aapka Amit. Aaj himmat karke aapke saamne dil khol raha hu.",
+"Aapke jaane ke baad main andar se toot gaya hu. Raat ko neend nahi aati, bas chhat ko dekhta rehta hu aur aapko yaad karta hu.",
+"Log kehte hain mard rote nahi... par Kajal, main aapke liye har raat takiye me muh chhupakar roya hu.",
+"Mera seena bhaari rehta hai, saans lene me bhi dard hota hai. Aisa lagta hai jaise kuch chheen gaya ho mujhse.",
+"Aapki sagai ki khabar ne mujhe zinda laash bana diya hai. Sochta hu aap kisi aur ki ho jayengi... to mera kya hoga?",
+"Maine galtiyan ki hain, main bura hu... par mera pyar aapke liye aaj bhi utna hi saccha hai jitna pehle din tha.",
+"Kajal, main aapse bheekh nahi maang raha, bas ek mauka maang raha hu apni mohabbat ko saabit karne ka.",
+"Aap ek baar keh dijiye aapne maaf kiya... meri rooh ko sukoon mil jayega."
+];
+let i=0, lineEl=document.getElementById('line'), dotsEl=document.getElementById('dots');
+function render(){
+  lineEl.classList.add('fade');
+  setTimeout(()=>{
+    lineEl.innerText = lines[i];
+    lineEl.classList.remove('fade');
+    dotsEl.innerText = lines.map((_,k)=>k===i?'●':'○').join(' ');
+    i=(i+1)%lines.length;
+  },800);
+}
+render(); i=1;
+setInterval(render, 6000);
+
+function sayYes(){
+  let m=document.getElementById('msg');
+  m.style.display='block';
+  m.innerHTML="Kajal, aapne mujhe jeene ki wajah de di... 🥺❤️<br><br>Main kasam khata hu, ab meri wajah se aapki aankhon me kabhi aansu nahi aayenge.<br>Ye Amit sirf aapka tha, aapka hai, aur aapka rahega.";
+  for(let k=0;k<20;k++){
+    setTimeout(()=>{
+      let h=document.createElement('div');
+      h.innerText='❤️'; h.style.position='fixed'; h.style.left=Math.random()*100+'vw'; h.style.top='-30px'; h.style.fontSize='22px'; h.style.transition='top 3s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.style.top='110vh',50);
+      setTimeout(()=>h.remove(),3200);
+    },k*200);
+  }
+}
+</script>
+</body>
+</html>
